@@ -10,9 +10,9 @@ class ProductPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
-        return false;
+        return true; // Anyone can browse products
     }
 
     /**
@@ -20,7 +20,7 @@ class ProductPolicy
      */
     public function view(?User $user, Product $product): bool
     {
-        return true;
+        return true; // Anyone can view a product
     }
 
     /**
@@ -28,7 +28,7 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->isSeller(); // Only sellers can create
     }
 
     /**
@@ -36,7 +36,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return $user->id === $product->user_id;
+        return $user->id === $product->user_id; // Only owner can update
     }
 
     /**
@@ -44,7 +44,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return $user->id === $product->user_id;
+        return $user->id === $product->user_id; // Only owner can delete
     }
 
     /**

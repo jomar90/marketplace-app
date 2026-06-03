@@ -1,11 +1,23 @@
 <x-mail::message>
-# Introduction
+# Product Created Successfully
 
-The body of your message.
+Your product **{{ $product->name }}** has been successfully published on the marketplace.
 
-<x-mail::button :url="''">
-Button Text
+**Details:**
+
+- **Price:** ${{ number_format($product->price, 2) }}
+- **Stock:** {{ $product->stock }} units
+- **Category:** {{ $product->category->name }}
+
+**Description:**
+
+{{ $product->description }}
+
+<x-mail::button :url="route('products.show', $product)">
+View Your Product
 </x-mail::button>
+
+Thank you for listing on our marketplace!
 
 Thanks,<br>
 {{ config('app.name') }}

@@ -12,7 +12,7 @@ class MessagePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true; // Users can view their messages
     }
 
     /**
@@ -20,7 +20,8 @@ class MessagePolicy
      */
     public function view(User $user, Message $message): bool
     {
-        return false;
+        // Sender and receiver can view the message
+        return $user->id === $message->sender_id || $user->id === $message->receiver_id;
     }
 
     /**
@@ -28,7 +29,7 @@ class MessagePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true; // Any authenticated user can send messages
     }
 
     /**
@@ -36,7 +37,7 @@ class MessagePolicy
      */
     public function update(User $user, Message $message): bool
     {
-        return $user->id === $message->sender_id;
+        return $user->id === $message->sender_id; // Only sender can edit
     }
 
     /**
@@ -44,7 +45,7 @@ class MessagePolicy
      */
     public function delete(User $user, Message $message): bool
     {
-        return $user->id === $message->sender_id;
+        return $user->id === $message->sender_id; // Only sender can delete
     }
 
     /**

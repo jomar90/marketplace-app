@@ -12,7 +12,7 @@ class OrderPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true; // Users can view their orders
     }
 
     /**
@@ -28,7 +28,7 @@ class OrderPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->isBuyer(); // Only buyers can create orders
     }
 
     /**

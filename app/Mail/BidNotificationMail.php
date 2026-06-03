@@ -2,16 +2,15 @@
 
 namespace App\Mail;
 
-use App\Models\Message;
+use App\Models\Bid;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NewMessageMail extends Mailable implements ShouldQueue
+class BidNotificationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,7 +18,7 @@ class NewMessageMail extends Mailable implements ShouldQueue
      * Create a new message instance.
      */
     public function __construct(
-        public Message $message
+        public Bid $bid
     ) {}
 
     /**
@@ -28,7 +27,7 @@ class NewMessageMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New message from ' . $this->message->sender->name,
+            subject: 'New bid on your product: '.$this->bid->product->name,
         );
     }
 
@@ -38,7 +37,7 @@ class NewMessageMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.messages.new',
+            markdown: 'emails.bids.placed',
         );
     }
 
