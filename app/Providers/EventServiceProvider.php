@@ -32,5 +32,4 @@ class EventServiceProvider extends ServiceProvider
     /**
      * Enable the scanning of events and listeners found within the app path.
      */
-    public bool $shouldDiscoverEvents = true;
 }
