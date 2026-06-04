@@ -32,6 +32,8 @@ class StoreProductRequest extends FormRequest
             'stock' => ['required', 'integer', 'min:0'],
 
             'description' => ['required', 'string'],
+
+            'is_promoted' => ['nullable', 'boolean'],
         ];
     }
 }

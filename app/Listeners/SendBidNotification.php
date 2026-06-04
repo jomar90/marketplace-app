@@ -23,6 +23,6 @@ class SendBidNotification implements ShouldQueue
     public function handle(BidCreated $event): void
     {
         Mail::to($event->bid->product->user->email)
-            ->queue(new BidNotificationMail($event->bid));
+            ->send(new BidNotificationMail($event->bid));
     }
 }

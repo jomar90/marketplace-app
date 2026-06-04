@@ -66,6 +66,7 @@ class ProductController extends Controller
             ...$request->validated(),
             'user_id' => auth()->id(),
             'slug' => Str::slug($request->name),
+            'is_promoted' => $request->boolean('is_promoted'),
         ]);
 
         Cache::forget('products');

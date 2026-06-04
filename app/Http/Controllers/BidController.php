@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BidCreated;
 use App\Http\Requests\StoreBidRequest;
 use App\Http\Requests\UpdateBidRequest;
 use App\Models\Bid;
@@ -29,11 +30,13 @@ class BidController extends Controller
         if (auth()->id() === $product->user_id) {
             abort(403);
         }
-        Bid::create([
+        $bid = Bid::create([
             ...$request->validated(),
             'user_id' => auth()->id(),
             'product_id' => $product->id,
         ]);
+
+         event(new BidCreated($bid));
 
         return redirect()
             ->route('products.show', $product)

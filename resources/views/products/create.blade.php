@@ -3,7 +3,7 @@
         Add Product
     </x-slot:heading>
 
-    <form method="POST" action="/books">
+    <form method="POST" action="/products">
         @csrf
 
         <div class="space-y-12">
@@ -57,11 +57,27 @@
                         <x-form-label for="description">Description</x-form-label>
 
                         <div class="mt-2">
-                            <x-form-input name="description" id="description"
-                                class="border-gray-300 rounded-md shadow-sm w-full">
+                            <x-form-input
+                                name="description"
+                                id="description"
+                                class="border-gray-300 rounded-md shadow-sm w-full"
+                            />
 
-                                <x-form-error name="description" />
+                            <x-form-error name="description" />
                         </div>
+                    </x-form-field>
+
+                    <x-form-field>
+                        <div class="flex items-center gap-2 mt-2">
+                            <input type="checkbox" name="is_promoted" id="is_promoted" value="1"
+                                class="rounded border-gray-300">
+
+                            <x-form-label for="is_promoted">
+                                Promote this product
+                            </x-form-label>
+                        </div>
+
+                        <x-form-error name="is_promoted" />
                     </x-form-field>
 
                 </div>

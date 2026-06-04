@@ -12,7 +12,7 @@ class BidPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->isSeller(); // Sellers can view bids on their products
+        return $user->isSeller();
     }
 
     /**
@@ -20,7 +20,6 @@ class BidPolicy
      */
     public function view(User $user, Bid $bid): bool
     {
-        // Seller can view bids on their products, buyer can view their own bids
         return $user->id === $bid->user_id || $user->id === $bid->product->user_id;
     }
 
@@ -29,7 +28,7 @@ class BidPolicy
      */
     public function create(User $user): bool
     {
-        return $user->isBuyer(); // Only buyers can create bids
+        return $user->isBuyer();
     }
 
     /**
@@ -37,7 +36,7 @@ class BidPolicy
      */
     public function update(User $user, Bid $bid): bool
     {
-        return $user->id === $bid->user_id; // Only the bidder can update their bid
+        return $user->id === $bid->user_id;
     }
 
     /**
@@ -45,7 +44,7 @@ class BidPolicy
      */
     public function delete(User $user, Bid $bid): bool
     {
-        return $user->id === $bid->user_id; // Only the bidder can delete their bid
+        return $user->id === $bid->user_id;
     }
 
     /**

@@ -22,6 +22,6 @@ class SendProductCreatedNotification implements ShouldQueue
     public function handle(object $event): void
     {
         Mail::to($event->product->user->email)
-            ->queue(new ProductCreatedMail($event->product));
+            ->send(new ProductCreatedMail($event->product));
     }
 }

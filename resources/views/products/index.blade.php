@@ -3,10 +3,7 @@
         {{-- {{ __('products.name') }} --}}
         Products
     </x-slot:heading>
-{{--
-    @auth
-    <a href="{{ route('books.report') }}">Book Report</a>
-@endauth --}}
+
 
         <a href="/lang/en">En</a> |
         <a href="/lang/nl">NL</a>
@@ -35,7 +32,6 @@
         @foreach ($products as $product)
             <div class="px-4 py-6 border border-gray-200 rounded-lg">
 
-                <!-- Seller -->
                 <div class="font-bold text-blue-500 text-sm">
                     <a href="/sellers/{{ $product->user?->id }}">
                         {{ $product->user?->name }}
@@ -49,6 +45,12 @@
                             {{ $product->name }}
                         </a>
                     </strong>
+
+                        @if ($product->is_promoted)
+                            <span class="px-2 py-1 text-xs font-semibold text-white bg-yellow-500 rounded">
+                                ⭐ Promoted
+                            </span>
+                        @endif
                 </div>
 
                 <div>
